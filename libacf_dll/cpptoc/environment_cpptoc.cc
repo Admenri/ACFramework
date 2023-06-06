@@ -7,7 +7,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=e6424f9e3cdeb1103e57ead535b23da77011276b$
+// $hash=113e86fc475b28952a2c132bdfe7f82affa355ae$
 //
 
 #include "libacf_dll/cpptoc/environment_cpptoc.h"
@@ -16,7 +16,11 @@
 #include "libacf_dll/cpptoc/cookie_cpptoc.h"
 #include "libacf_dll/cpptoc/dictionary_value_cpptoc.h"
 #include "libacf_dll/cpptoc/list_value_cpptoc.h"
+#include "libacf_dll/cpptoc/post_data_cpptoc.h"
+#include "libacf_dll/cpptoc/post_data_element_cpptoc.h"
 #include "libacf_dll/cpptoc/profile_cpptoc.h"
+#include "libacf_dll/cpptoc/request_cpptoc.h"
+#include "libacf_dll/cpptoc/response_cpptoc.h"
 #include "libacf_dll/cpptoc/value_cpptoc.h"
 #include "libacf_dll/ctocpp/browser_handler_ctocpp.h"
 #include "libacf_dll/ctocpp/complete_handler_ctocpp.h"
@@ -133,6 +137,48 @@ ACF_EXPORT struct _acf_cookie_t* acf_environment_create_cookie() {
   return AcfCookieCppToC::Wrap(_retval);
 }
 
+ACF_EXPORT struct _acf_request_t* acf_environment_create_request() {
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  // Execute
+  AcfRefPtr<AcfRequest> _retval = AcfEnvironment::CreateRequest();
+
+  // Return type: refptr_same
+  return AcfRequestCppToC::Wrap(_retval);
+}
+
+ACF_EXPORT struct _acf_post_data_t* acf_environment_create_post_data() {
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  // Execute
+  AcfRefPtr<AcfPostData> _retval = AcfEnvironment::CreatePostData();
+
+  // Return type: refptr_same
+  return AcfPostDataCppToC::Wrap(_retval);
+}
+
+ACF_EXPORT struct _acf_post_data_element_t*
+acf_environment_create_post_data_element() {
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  // Execute
+  AcfRefPtr<AcfPostDataElement> _retval =
+      AcfEnvironment::CreatePostDataElement();
+
+  // Return type: refptr_same
+  return AcfPostDataElementCppToC::Wrap(_retval);
+}
+
+ACF_EXPORT struct _acf_response_t* acf_environment_create_response() {
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  // Execute
+  AcfRefPtr<AcfResponse> _retval = AcfEnvironment::CreateResponse();
+
+  // Return type: refptr_same
+  return AcfResponseCppToC::Wrap(_retval);
+}
+
 namespace {
 
 // MEMBER FUNCTIONS - Body may be edited by hand.
@@ -197,7 +243,7 @@ environment_get_browser_version(struct _acf_environment_t* self) {
   return _retval.DetachToUserFree();
 }
 
-uint32 ACF_CALLBACK
+uint64 ACF_CALLBACK
 environment_get_process_pid(struct _acf_environment_t* self) {
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
 
@@ -205,7 +251,7 @@ environment_get_process_pid(struct _acf_environment_t* self) {
     return 0;
 
   // Execute
-  uint32 _retval = AcfEnvironmentCppToC::Get(self)->GetProcessPID();
+  uint64 _retval = AcfEnvironmentCppToC::Get(self)->GetProcessPID();
 
   // Return type: simple
   return _retval;

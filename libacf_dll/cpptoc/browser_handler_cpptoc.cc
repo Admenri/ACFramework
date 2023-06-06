@@ -7,17 +7,19 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=fa08d9e3b362379f838419b24161ee24951f3ad8$
+// $hash=56ef62870887bf35bf82bd3ce260405ed6655ff2$
 //
 
 #include "libacf_dll/cpptoc/browser_handler_cpptoc.h"
 #include "libacf_dll/ctocpp/browser_ctocpp.h"
+#include "libacf_dll/ctocpp/callback_ctocpp.h"
 #include "libacf_dll/ctocpp/context_menu_callback_ctocpp.h"
 #include "libacf_dll/ctocpp/context_menu_model_ctocpp.h"
 #include "libacf_dll/ctocpp/context_menu_params_ctocpp.h"
 #include "libacf_dll/ctocpp/frame_ctocpp.h"
 #include "libacf_dll/ctocpp/login_delegate_ctocpp.h"
 #include "libacf_dll/ctocpp/new_window_delegate_ctocpp.h"
+#include "libacf_dll/ctocpp/request_ctocpp.h"
 #include "libacf_dll/transfer_util.h"
 
 namespace {
@@ -415,6 +417,38 @@ browser_handler_did_mute_state_update(struct _acf_browser_handler_t* self,
       AcfBrowserCToCpp::Wrap(browser), muted ? true : false);
 }
 
+void ACF_CALLBACK
+browser_handler_on_before_navigation(struct _acf_browser_handler_t* self,
+                                     acf_browser_t* browser,
+                                     struct _acf_frame_t* frame,
+                                     struct _acf_request_t* request,
+                                     int user_gesture,
+                                     int is_redirect,
+                                     struct _acf_callback_t* callback) {
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  if (!self)
+    return;
+  // Verify param: browser; type: refptr_diff
+  if (!browser)
+    return;
+  // Verify param: frame; type: refptr_diff
+  if (!frame)
+    return;
+  // Verify param: request; type: refptr_diff
+  if (!request)
+    return;
+  // Verify param: callback; type: refptr_diff
+  if (!callback)
+    return;
+
+  // Execute
+  AcfBrowserHandlerCppToC::Get(self)->OnBeforeNavigation(
+      AcfBrowserCToCpp::Wrap(browser), AcfFrameCToCpp::Wrap(frame),
+      AcfRequestCToCpp::Wrap(request), user_gesture ? true : false,
+      is_redirect ? true : false, AcfCallbackCToCpp::Wrap(callback));
+}
+
 }  // namespace
 
 // CONSTRUCTOR - Do not edit by hand.
@@ -445,6 +479,7 @@ AcfBrowserHandlerCppToC::AcfBrowserHandlerCppToC() {
       browser_handler_on_loading_progress_change;
   GetStruct()->on_audio_state_change = browser_handler_on_audio_state_change;
   GetStruct()->did_mute_state_update = browser_handler_did_mute_state_update;
+  GetStruct()->on_before_navigation = browser_handler_on_before_navigation;
 }
 
 // DESTRUCTOR - Do not edit by hand.

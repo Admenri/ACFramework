@@ -7,11 +7,14 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=c807cb8bc4b4b6bf7e626890cc546e1e28093ac6$
+// $hash=95ac4a60bcd33793c7dfbe4860f96b96eef9d61e$
 //
 
 #include "libacf_dll/ctocpp/environment_handler_ctocpp.h"
 #include "libacf_dll/cpptoc/environment_cpptoc.h"
+#include "libacf_dll/cpptoc/profile_cpptoc.h"
+#include "libacf_dll/cpptoc/request_cpptoc.h"
+#include "libacf_dll/ctocpp/resource_request_handler_ctocpp.h"
 
 // VIRTUAL METHODS - Body may be edited by hand.
 
@@ -29,6 +32,46 @@ void AcfEnvironmentHandlerCToCpp::OnInitialized(AcfRefPtr<AcfEnvironment> env,
 
   // Execute
   _struct->on_initialized(_struct, AcfEnvironmentCppToC::Wrap(env), success);
+}
+
+AcfRefPtr<AcfResourceRequestHandler>
+AcfEnvironmentHandlerCToCpp::GetResourceRequestHandler(
+    AcfRefPtr<AcfProfile> profile,
+    int64 frame_id,
+    AcfRefPtr<AcfRequest> request,
+    bool is_navigation,
+    bool is_download,
+    const AcfString& request_initiator,
+    bool& block_request) {
+  acf_environment_handler_t* _struct = GetStruct();
+  if (ACF_MEMBER_MISSING(_struct, get_resource_request_handler))
+    return nullptr;
+
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  // Verify param: profile; type: refptr_diff
+  if (!profile.get())
+    return nullptr;
+  // Verify param: request; type: refptr_diff
+  if (!request.get())
+    return nullptr;
+  // Unverified params: request_initiator
+
+  // Translate param: block_request; type: bool_byref
+  int block_requestInt = block_request;
+
+  // Execute
+  acf_resource_request_handler_t* _retval =
+      _struct->get_resource_request_handler(
+          _struct, AcfProfileCppToC::Wrap(profile), frame_id,
+          AcfRequestCppToC::Wrap(request), is_navigation, is_download,
+          request_initiator.GetStruct(), &block_requestInt);
+
+  // Restore param:block_request; type: bool_byref
+  block_request = block_requestInt ? true : false;
+
+  // Return type: refptr_same
+  return AcfResourceRequestHandlerCToCpp::Wrap(_retval);
 }
 
 // CONSTRUCTOR - Do not edit by hand.

@@ -7,7 +7,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=60c2a9ae5a52bb0069976ae377ce6c23b0cc0ac2$
+// $hash=ffeb95f5fd20797d2dd290101dc9b9bf7c930420$
 //
 
 #include "libacf_dll/cpptoc/browser_cpptoc.h"
@@ -406,6 +406,23 @@ browser_get_main_frame(struct _acf_browser_t* self) {
   return AcfFrameCppToC::Wrap(_retval);
 }
 
+void ACF_CALLBACK browser_set_settings(struct _acf_browser_t* self,
+                                       const acf_browser_settings_t* settings) {
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  if (!self)
+    return;
+  // Verify param: settings; type: simple_byref_const
+  if (!settings)
+    return;
+
+  // Translate param: settings; type: simple_byref_const
+  AcfBrowserSettings settingsVal = settings ? *settings : AcfBrowserSettings();
+
+  // Execute
+  AcfBrowserCppToC::Get(self)->SetSettings(settingsVal);
+}
+
 void ACF_CALLBACK browser_send_key_event(struct _acf_browser_t* self,
                                          const acf_key_event_t* event) {
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
@@ -579,6 +596,7 @@ AcfBrowserCppToC::AcfBrowserCppToC() {
   GetStruct()->get_frame_byident = browser_get_frame_byident;
   GetStruct()->get_frame = browser_get_frame;
   GetStruct()->get_main_frame = browser_get_main_frame;
+  GetStruct()->set_settings = browser_set_settings;
   GetStruct()->send_key_event = browser_send_key_event;
   GetStruct()->send_mouse_click_event = browser_send_mouse_click_event;
   GetStruct()->send_mouse_move_event = browser_send_mouse_move_event;

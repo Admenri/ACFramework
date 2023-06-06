@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|x64">
-      <Configuration>Debug</Configuration>
-      <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
@@ -22,6 +14,7 @@
     <ClCompile Include="..\libacf_dll\cpptoc\binary_value_cpptoc.cc" />
     <ClCompile Include="..\libacf_dll\cpptoc\browser_cpptoc.cc" />
     <ClCompile Include="..\libacf_dll\cpptoc\browser_handler_cpptoc.cc" />
+    <ClCompile Include="..\libacf_dll\cpptoc\callback_cpptoc.cc" />
     <ClCompile Include="..\libacf_dll\cpptoc\complete_handler_cpptoc.cc" />
     <ClCompile Include="..\libacf_dll\cpptoc\complete_value_handler_cpptoc.cc" />
     <ClCompile Include="..\libacf_dll\cpptoc\context_menu_callback_cpptoc.cc" />
@@ -38,12 +31,22 @@
     <ClCompile Include="..\libacf_dll\cpptoc\login_delegate_cpptoc.cc" />
     <ClCompile Include="..\libacf_dll\cpptoc\new_window_delegate_cpptoc.cc" />
     <ClCompile Include="..\libacf_dll\cpptoc\number_complete_handler_cpptoc.cc" />
+    <ClCompile Include="..\libacf_dll\cpptoc\post_data_cpptoc.cc" />
+    <ClCompile Include="..\libacf_dll\cpptoc\post_data_element_cpptoc.cc" />
     <ClCompile Include="..\libacf_dll\cpptoc\profile_cpptoc.cc" />
+    <ClCompile Include="..\libacf_dll\cpptoc\request_cpptoc.cc" />
+    <ClCompile Include="..\libacf_dll\cpptoc\resource_handler_cpptoc.cc" />
+    <ClCompile Include="..\libacf_dll\cpptoc\resource_read_callback_cpptoc.cc" />
+    <ClCompile Include="..\libacf_dll\cpptoc\resource_request_handler_cpptoc.cc" />
+    <ClCompile Include="..\libacf_dll\cpptoc\resource_skip_callback_cpptoc.cc" />
+    <ClCompile Include="..\libacf_dll\cpptoc\response_cpptoc.cc" />
+    <ClCompile Include="..\libacf_dll\cpptoc\response_filter_cpptoc.cc" />
     <ClCompile Include="..\libacf_dll\cpptoc\string_visitor_cpptoc.cc" />
     <ClCompile Include="..\libacf_dll\cpptoc\value_cpptoc.cc" />
     <ClCompile Include="..\libacf_dll\ctocpp\binary_value_ctocpp.cc" />
     <ClCompile Include="..\libacf_dll\ctocpp\browser_ctocpp.cc" />
     <ClCompile Include="..\libacf_dll\ctocpp\browser_handler_ctocpp.cc" />
+    <ClCompile Include="..\libacf_dll\ctocpp\callback_ctocpp.cc" />
     <ClCompile Include="..\libacf_dll\ctocpp\complete_handler_ctocpp.cc" />
     <ClCompile Include="..\libacf_dll\ctocpp\complete_value_handler_ctocpp.cc" />
     <ClCompile Include="..\libacf_dll\ctocpp\context_menu_callback_ctocpp.cc" />
@@ -61,7 +64,16 @@
     <ClCompile Include="..\libacf_dll\ctocpp\login_delegate_ctocpp.cc" />
     <ClCompile Include="..\libacf_dll\ctocpp\new_window_delegate_ctocpp.cc" />
     <ClCompile Include="..\libacf_dll\ctocpp\number_complete_handler_ctocpp.cc" />
+    <ClCompile Include="..\libacf_dll\ctocpp\post_data_ctocpp.cc" />
+    <ClCompile Include="..\libacf_dll\ctocpp\post_data_element_ctocpp.cc" />
     <ClCompile Include="..\libacf_dll\ctocpp\profile_ctocpp.cc" />
+    <ClCompile Include="..\libacf_dll\ctocpp\request_ctocpp.cc" />
+    <ClCompile Include="..\libacf_dll\ctocpp\resource_handler_ctocpp.cc" />
+    <ClCompile Include="..\libacf_dll\ctocpp\resource_read_callback_ctocpp.cc" />
+    <ClCompile Include="..\libacf_dll\ctocpp\resource_request_handler_ctocpp.cc" />
+    <ClCompile Include="..\libacf_dll\ctocpp\resource_skip_callback_ctocpp.cc" />
+    <ClCompile Include="..\libacf_dll\ctocpp\response_ctocpp.cc" />
+    <ClCompile Include="..\libacf_dll\ctocpp\response_filter_ctocpp.cc" />
     <ClCompile Include="..\libacf_dll\ctocpp\string_visitor_ctocpp.cc" />
     <ClCompile Include="..\libacf_dll\ctocpp\value_ctocpp.cc" />
     <ClCompile Include="..\libacf_dll\libacf_dll.cc" />
@@ -71,6 +83,7 @@
     <ClInclude Include="..\libacf_dll\cpptoc\binary_value_cpptoc.h" />
     <ClInclude Include="..\libacf_dll\cpptoc\browser_cpptoc.h" />
     <ClInclude Include="..\libacf_dll\cpptoc\browser_handler_cpptoc.h" />
+    <ClInclude Include="..\libacf_dll\cpptoc\callback_cpptoc.h" />
     <ClInclude Include="..\libacf_dll\cpptoc\complete_handler_cpptoc.h" />
     <ClInclude Include="..\libacf_dll\cpptoc\complete_value_handler_cpptoc.h" />
     <ClInclude Include="..\libacf_dll\cpptoc\context_menu_callback_cpptoc.h" />
@@ -89,12 +102,22 @@
     <ClInclude Include="..\libacf_dll\cpptoc\login_delegate_cpptoc.h" />
     <ClInclude Include="..\libacf_dll\cpptoc\new_window_delegate_cpptoc.h" />
     <ClInclude Include="..\libacf_dll\cpptoc\number_complete_handler_cpptoc.h" />
+    <ClInclude Include="..\libacf_dll\cpptoc\post_data_cpptoc.h" />
+    <ClInclude Include="..\libacf_dll\cpptoc\post_data_element_cpptoc.h" />
     <ClInclude Include="..\libacf_dll\cpptoc\profile_cpptoc.h" />
+    <ClInclude Include="..\libacf_dll\cpptoc\request_cpptoc.h" />
+    <ClInclude Include="..\libacf_dll\cpptoc\resource_handler_cpptoc.h" />
+    <ClInclude Include="..\libacf_dll\cpptoc\resource_read_callback_cpptoc.h" />
+    <ClInclude Include="..\libacf_dll\cpptoc\resource_request_handler_cpptoc.h" />
+    <ClInclude Include="..\libacf_dll\cpptoc\resource_skip_callback_cpptoc.h" />
+    <ClInclude Include="..\libacf_dll\cpptoc\response_cpptoc.h" />
+    <ClInclude Include="..\libacf_dll\cpptoc\response_filter_cpptoc.h" />
     <ClInclude Include="..\libacf_dll\cpptoc\string_visitor_cpptoc.h" />
     <ClInclude Include="..\libacf_dll\cpptoc\value_cpptoc.h" />
     <ClInclude Include="..\libacf_dll\ctocpp\binary_value_ctocpp.h" />
     <ClInclude Include="..\libacf_dll\ctocpp\browser_ctocpp.h" />
     <ClInclude Include="..\libacf_dll\ctocpp\browser_handler_ctocpp.h" />
+    <ClInclude Include="..\libacf_dll\ctocpp\callback_ctocpp.h" />
     <ClInclude Include="..\libacf_dll\ctocpp\complete_handler_ctocpp.h" />
     <ClInclude Include="..\libacf_dll\ctocpp\complete_value_handler_ctocpp.h" />
     <ClInclude Include="..\libacf_dll\ctocpp\context_menu_callback_ctocpp.h" />
@@ -114,7 +137,16 @@
     <ClInclude Include="..\libacf_dll\ctocpp\login_delegate_ctocpp.h" />
     <ClInclude Include="..\libacf_dll\ctocpp\new_window_delegate_ctocpp.h" />
     <ClInclude Include="..\libacf_dll\ctocpp\number_complete_handler_ctocpp.h" />
+    <ClInclude Include="..\libacf_dll\ctocpp\post_data_ctocpp.h" />
+    <ClInclude Include="..\libacf_dll\ctocpp\post_data_element_ctocpp.h" />
     <ClInclude Include="..\libacf_dll\ctocpp\profile_ctocpp.h" />
+    <ClInclude Include="..\libacf_dll\ctocpp\request_ctocpp.h" />
+    <ClInclude Include="..\libacf_dll\ctocpp\resource_handler_ctocpp.h" />
+    <ClInclude Include="..\libacf_dll\ctocpp\resource_read_callback_ctocpp.h" />
+    <ClInclude Include="..\libacf_dll\ctocpp\resource_request_handler_ctocpp.h" />
+    <ClInclude Include="..\libacf_dll\ctocpp\resource_skip_callback_ctocpp.h" />
+    <ClInclude Include="..\libacf_dll\ctocpp\response_ctocpp.h" />
+    <ClInclude Include="..\libacf_dll\ctocpp\response_filter_ctocpp.h" />
     <ClInclude Include="..\libacf_dll\ctocpp\string_visitor_ctocpp.h" />
     <ClInclude Include="..\libacf_dll\ctocpp\value_ctocpp.h" />
     <ClInclude Include="..\libacf_dll\template_util.h" />
@@ -130,25 +162,11 @@
     <ProjectName>libacf_dll_wrapper</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Static</UseOfMfc>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Static</UseOfMfc>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
@@ -165,52 +183,21 @@
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)out\</OutDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)out\</OutDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)out\</OutDir>
+    <OutDir>$(SolutionDir)out\x86\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)out\</OutDir>
+    <OutDir>$(SolutionDir)out\x64\</OutDir>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NOMINMAX;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\;</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4100;4127;4244;4324;4481;4512;4701;4702;4996</DisableSpecificWarnings>
-    </ClCompile>
-    <Link>
-      <SubSystem>
-      </SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -229,23 +216,6 @@
       </SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NOMINMAX;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>..\;</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4100;4127;4244;4324;4481;4512;4701;4702;4996</DisableSpecificWarnings>
-    </ClCompile>
-    <Link>
-      <SubSystem>
-      </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>

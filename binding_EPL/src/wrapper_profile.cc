@@ -48,7 +48,7 @@ void ACF_CALLBACK set_prefs(AcfProfile* obj, LPCSTR name, AcfValue* value) {
   obj->SetPreference(name, value, new CompleteSyncCallback(notify.get()));
 
   while (!*notify) {
-    ::Sleep(10);
+    ::Sleep(0);
   }
 }
 
@@ -61,7 +61,7 @@ void ACF_CALLBACK remove_browsing_data(AcfProfile* obj,
                           new CompleteSyncCallback(notify.get()));
 
   while (!*notify) {
-    ::Sleep(10);
+    ::Sleep(0);
   }
 }
 
@@ -111,8 +111,6 @@ AcfRefPtr<AcfCookie> transfer_cookie_data(PACF_COOKIE cookie) {
   AcfRefPtr<AcfCookie> pCookie = AcfEnvironment::CreateCookie();
 
   if (cookie) {
-    std::cout << "Ptr: " << pCookie.get() << '\n';
-
     if (cookie->name && *cookie->name) {
       pCookie->SetName(cookie->name);
     }
@@ -174,7 +172,7 @@ int ACF_CALLBACK visit_cookies_sync(AcfCookieManager* obj, LPCSTR url,
   obj->GetCookies(url, httpOnly, lpHandler);
 
   while (!*notify) {
-    ::Sleep(10);
+    ::Sleep(0);
   }
 
   FreeAryElement(*eArray);

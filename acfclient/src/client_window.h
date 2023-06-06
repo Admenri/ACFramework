@@ -84,6 +84,25 @@ class Window : public AcfBrowserHandler {
                                double progress) override;
   void OnAudioStateChange(AcfRefPtr<AcfBrowser> browser, bool audible) override;
 
+  void OnLoadStart(AcfRefPtr<AcfBrowser> browser,
+                   AcfRefPtr<AcfFrame> frame,
+                   int transition) override;
+  void OnLoadEnd(AcfRefPtr<AcfBrowser> browser,
+                 AcfRefPtr<AcfFrame> frame,
+                 const AcfString& url,
+                 int http_status_code) override;
+  void OnLoadError(AcfRefPtr<AcfBrowser> browser,
+                   AcfRefPtr<AcfFrame> frame,
+                   const AcfString& url,
+                   int error_code) override;
+
+  void OnBeforeNavigation(AcfRefPtr<AcfBrowser> browser,
+                          AcfRefPtr<AcfFrame> frame,
+                          AcfRefPtr<AcfRequest> request,
+                          bool user_gesture,
+                          bool is_redirect,
+                          AcfRefPtr<AcfCallback> callback) override;
+
   AcfBrowser* browser_weak_ptr_ = nullptr;
 
  private:

@@ -7,7 +7,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=09ee226568bfd2ee938a6ccb6da223cf1457a8cf$
+// $hash=3da4e6f394f286f71a653698e715cbb22e3c13be$
 //
 
 #include "libacf_dll/ctocpp/environment_ctocpp.h"
@@ -19,7 +19,11 @@
 #include "libacf_dll/ctocpp/cookie_ctocpp.h"
 #include "libacf_dll/ctocpp/dictionary_value_ctocpp.h"
 #include "libacf_dll/ctocpp/list_value_ctocpp.h"
+#include "libacf_dll/ctocpp/post_data_ctocpp.h"
+#include "libacf_dll/ctocpp/post_data_element_ctocpp.h"
 #include "libacf_dll/ctocpp/profile_ctocpp.h"
+#include "libacf_dll/ctocpp/request_ctocpp.h"
+#include "libacf_dll/ctocpp/response_ctocpp.h"
 #include "libacf_dll/ctocpp/value_ctocpp.h"
 
 // STATIC METHODS - Body may be edited by hand.
@@ -119,6 +123,46 @@ AcfRefPtr<AcfCookie> AcfEnvironment::CreateCookie() {
   return AcfCookieCToCpp::Wrap(_retval);
 }
 
+AcfRefPtr<AcfRequest> AcfEnvironment::CreateRequest() {
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  // Execute
+  acf_request_t* _retval = acf_environment_create_request();
+
+  // Return type: refptr_same
+  return AcfRequestCToCpp::Wrap(_retval);
+}
+
+AcfRefPtr<AcfPostData> AcfEnvironment::CreatePostData() {
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  // Execute
+  acf_post_data_t* _retval = acf_environment_create_post_data();
+
+  // Return type: refptr_same
+  return AcfPostDataCToCpp::Wrap(_retval);
+}
+
+AcfRefPtr<AcfPostDataElement> AcfEnvironment::CreatePostDataElement() {
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  // Execute
+  acf_post_data_element_t* _retval = acf_environment_create_post_data_element();
+
+  // Return type: refptr_same
+  return AcfPostDataElementCToCpp::Wrap(_retval);
+}
+
+AcfRefPtr<AcfResponse> AcfEnvironment::CreateResponse() {
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  // Execute
+  acf_response_t* _retval = acf_environment_create_response();
+
+  // Return type: refptr_same
+  return AcfResponseCToCpp::Wrap(_retval);
+}
+
 // VIRTUAL METHODS - Body may be edited by hand.
 
 bool AcfEnvironmentCToCpp::IsSame(AcfRefPtr<AcfEnvironment> that) {
@@ -183,7 +227,7 @@ AcfString AcfEnvironmentCToCpp::GetBrowserVersion() {
   return _retvalStr;
 }
 
-uint32 AcfEnvironmentCToCpp::GetProcessPID() {
+uint64 AcfEnvironmentCToCpp::GetProcessPID() {
   acf_environment_t* _struct = GetStruct();
   if (ACF_MEMBER_MISSING(_struct, get_process_pid))
     return 0;
@@ -191,7 +235,7 @@ uint32 AcfEnvironmentCToCpp::GetProcessPID() {
   // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
 
   // Execute
-  uint32 _retval = _struct->get_process_pid(_struct);
+  uint64 _retval = _struct->get_process_pid(_struct);
 
   // Return type: simple
   return _retval;

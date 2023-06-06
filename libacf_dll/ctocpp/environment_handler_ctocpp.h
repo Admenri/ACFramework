@@ -7,7 +7,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=a172cfa06c629055ed17fcc526893c6a740231b4$
+// $hash=bdb0f08c543b6f43c7419eba9204142057d92be4$
 //
 
 #ifndef ACF_CTOCPP_ENVIRONMENT_HANDLER_CTOCPP_H_
@@ -18,11 +18,17 @@
 #include "include/acf_browser_handler.h"
 #include "include/acf_environment.h"
 #include "include/acf_profile.h"
+#include "include/acf_request.h"
+#include "include/acf_resource_request_handler.h"
+#include "include/acf_response.h"
 #include "include/acf_values.h"
 #include "include/capi/acf_browser_capi.h"
 #include "include/capi/acf_browser_handler_capi.h"
 #include "include/capi/acf_environment_capi.h"
 #include "include/capi/acf_profile_capi.h"
+#include "include/capi/acf_request_capi.h"
+#include "include/capi/acf_resource_request_handler_capi.h"
+#include "include/capi/acf_response_capi.h"
 #include "include/capi/acf_values_capi.h"
 #include "libacf_dll/ctocpp/ctocpp_ref_counted.h"
 
@@ -38,6 +44,14 @@ class AcfEnvironmentHandlerCToCpp
 
   // AcfEnvironmentHandler methods.
   void OnInitialized(AcfRefPtr<AcfEnvironment> env, bool success) override;
+  AcfRefPtr<AcfResourceRequestHandler> GetResourceRequestHandler(
+      AcfRefPtr<AcfProfile> profile,
+      int64 frame_id,
+      AcfRefPtr<AcfRequest> request,
+      bool is_navigation,
+      bool is_download,
+      const AcfString& request_initiator,
+      bool& block_request) override;
 };
 
 #endif  // ACF_CTOCPP_ENVIRONMENT_HANDLER_CTOCPP_H_

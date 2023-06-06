@@ -3,6 +3,9 @@
 
 #include "include/acf_browser.h"
 #include "include/acf_profile.h"
+#include "include/acf_request.h"
+#include "include/acf_resource_request_handler.h"
+#include "include/acf_response.h"
 #include "include/acf_values.h"
 #include "include/internal/acf_def.h"
 #include "include/internal/acf_scoped_refptr.h"
@@ -21,6 +24,11 @@ class AcfEnvironment;
 class AcfBrowser;
 class AcfBrowserHandler;
 class AcfCookie;
+class AcfRequest;
+class AcfPostData;
+class AcfPostDataElement;
+class AcfResponse;
+class AcfResourceRequestHandler;
 
 ///
 /// Environment event handler
@@ -33,6 +41,33 @@ class AcfEnvironmentHandler : public virtual AcfBaseRefCounted {
   ///
   /*--acf()--*/
   virtual void OnInitialized(AcfRefPtr<AcfEnvironment> env, bool success) {}
+
+  ///
+  /// Called on the browser process IO thread before a resource request is
+  /// initiated. The |browser| and |frame| values represent the source of the
+  /// request. |request| represents the request contents and cannot be modified
+  /// in this callback. |is_navigation| will be true if the resource request is
+  /// a navigation. |is_download| will be true if the resource request is a
+  /// download. |request_initiator| is the origin (scheme + domain) of the page
+  /// that initiated the request. Set |disable_default_handling| to true to
+  /// disable default handling of the request, in which case it will need to be
+  /// handled via AcfResourceRequestHandler::GetResourceHandler or it will be
+  /// canceled. To allow the resource load to proceed with default handling
+  /// return NULL. To specify a handler for the resource return a
+  /// AcfResourceRequestHandler object. If this callback returns NULL the same
+  /// method will be called on the associated AcfRequestContextHandler, if any.
+  ///
+  /*--acf(optional_param=request_initiator)--*/
+  virtual AcfRefPtr<AcfResourceRequestHandler> GetResourceRequestHandler(
+      AcfRefPtr<AcfProfile> profile,
+      int64 frame_id,
+      AcfRefPtr<AcfRequest> request,
+      bool is_navigation,
+      bool is_download,
+      const AcfString& request_initiator,
+      bool& block_request) {
+    return nullptr;
+  }
 };
 
 ///
@@ -98,6 +133,30 @@ class AcfEnvironment : public virtual AcfBaseRefCounted {
   static AcfRefPtr<AcfCookie> CreateCookie();
 
   ///
+  /// Create a new CefRequest object.
+  ///
+  /*--acf()--*/
+  static AcfRefPtr<AcfRequest> CreateRequest();
+
+  ///
+  /// Create a new CefPostData object.
+  ///
+  /*--acf()--*/
+  static AcfRefPtr<AcfPostData> CreatePostData();
+
+  ///
+  /// Create a new AcfPostDataElement object.
+  ///
+  /*--acf()--*/
+  static AcfRefPtr<AcfPostDataElement> CreatePostDataElement();
+
+  ///
+  /// Create a new AcfResponse object.
+  ///
+  /*--acf()--*/
+  static AcfRefPtr<AcfResponse> CreateResponse();
+
+  ///
   /// Is same object
   ///
   /*--acf()--*/
@@ -125,7 +184,7 @@ class AcfEnvironment : public virtual AcfBaseRefCounted {
   /// Get Browser Process PID
   ///
   /*--acf()--*/
-  virtual uint32 GetProcessPID() = 0;
+  virtual uint64 GetProcessPID() = 0;
 
   ///
   /// Quit and wait for browser process

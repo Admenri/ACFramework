@@ -203,6 +203,12 @@ class AcfBrowser : public virtual AcfBaseRefCounted {
   virtual AcfRefPtr<AcfFrame> GetMainFrame() = 0;
 
   ///
+  /// Set browser additional settings. (Dynamic)
+  ///
+  /*--acf()--*/
+  virtual void SetSettings(const AcfBrowserSettings& settings) = 0;
+
+  ///
   /// Send a key event to the browser.
   ///
   /*--acf()--*/

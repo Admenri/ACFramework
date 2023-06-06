@@ -7,7 +7,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=99e7357c86b6f7f64bfc3859f1709d18635eb77e$
+// $hash=2253bc5388ef8cb92e52db7ad42f45ab30fa2c15$
 //
 
 #include "libacf_dll/cpptoc/profile_cpptoc.h"
@@ -43,6 +43,24 @@ int ACF_CALLBACK profile_is_valid(struct _acf_profile_t* self) {
 
   // Execute
   bool _retval = AcfProfileCppToC::Get(self)->IsValid();
+
+  // Return type: bool
+  return _retval;
+}
+
+int ACF_CALLBACK profile_is_same(struct _acf_profile_t* self,
+                                 struct _acf_profile_t* that) {
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  if (!self)
+    return 0;
+  // Verify param: that; type: refptr_same
+  if (!that)
+    return 0;
+
+  // Execute
+  bool _retval =
+      AcfProfileCppToC::Get(self)->IsSame(AcfProfileCppToC::Unwrap(that));
 
   // Return type: bool
   return _retval;
@@ -120,6 +138,7 @@ profile_get_cookie_manager(struct _acf_profile_t* self) {
 AcfProfileCppToC::AcfProfileCppToC() {
   GetStruct()->get_environment = profile_get_environment;
   GetStruct()->is_valid = profile_is_valid;
+  GetStruct()->is_same = profile_is_same;
   GetStruct()->get_path = profile_get_path;
   GetStruct()->set_preference = profile_set_preference;
   GetStruct()->remove_browsing_data = profile_remove_browsing_data;

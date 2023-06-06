@@ -88,11 +88,13 @@ BOOL ACF_CALLBACK get_user_data(AcfBrowser* obj, DWORD* retObj) {
     retObj[1] = (DWORD)data.get();
     retObj[2] = (DWORD)acf_cpp_fntable_dictionary;
   }
-  
+
   return !!retObj;
 }
 
-int ACF_CALLBACK get_frame_count(AcfBrowser* obj) { return obj->GetFrameCount(); }
+int ACF_CALLBACK get_frame_count(AcfBrowser* obj) {
+  return obj->GetFrameCount();
+}
 
 bool ACF_CALLBACK get_frame_identifiers(AcfBrowser* obj, LPVOID* eArray) {
   ISVALIDR(obj, NULL);
@@ -176,6 +178,51 @@ BOOL ACF_CALLBACK get_main_frame(AcfBrowser* obj, DWORD* retObj) {
   return !!frame.get();
 }
 
+void ACF_CALLBACK set_browser_settings(AcfBrowser* obj,
+                                       acf_browser_settings_t** settings) {
+  obj->SetSettings(**settings);
+}
+
+void ACF_CALLBACK key_event(AcfBrowser* obj, acf_key_event_t** event) {
+  obj->SendKeyEvent(**event);
+}
+
+void ACF_CALLBACK mouse_click_event(AcfBrowser* obj, acf_mouse_event_t** event,
+                                    acf_mouse_button_type_t type, bool up,
+                                    int count) {
+  obj->SendMouseClickEvent(**event, type, up, count);
+}
+
+void ACF_CALLBACK mouse_move_event(AcfBrowser* obj, acf_mouse_event_t** event,
+                                   bool leave) {
+  obj->SendMouseMoveEvent(**event, leave);
+}
+
+void ACF_CALLBACK mouse_wheel_event(AcfBrowser* obj, acf_mouse_event_t** event,
+                                    int x, int y) {
+  obj->SendMouseWheelEvent(**event, x, y);
+}
+
+void ACF_CALLBACK mute_audio(AcfBrowser* obj, bool mute) {
+  obj->SetAudioMuted(mute);
+}
+
+bool ACF_CALLBACK get_mute_audio(AcfBrowser* obj) {
+  return obj->IsAudioMuted();
+}
+
+void ACF_CALLBACK toggle_devtools(AcfBrowser* obj) { obj->ToggleDevtools(); }
+
+void ACF_CALLBACK toggle_taskmanager(AcfBrowser* obj) {
+  obj->OpenTaskManager();
+}
+
+void ACF_CALLBACK toggle_findbar(AcfBrowser* obj) { obj->RaiseFindBar(); }
+
+void ACF_CALLBACK zoom_page(AcfBrowser* obj, acf_zoom_type_t type) {
+  obj->ZoomPage(type);
+}
+
 /// <summary>
 /// New Window Delagate
 /// </summary>
@@ -198,19 +245,43 @@ void ACF_CALLBACK handle_new_window(AcfNewWindowDelegate* obj, bool handle) {
 }  // namespace
 
 DWORD acf_cpp_fntable_browser[] = {
-    (DWORD)is_same,         (DWORD)is_valid,
-    (DWORD)get_env,         (DWORD)get_profile,
-    (DWORD)get_hwnd,        (DWORD)close,
-    (DWORD)can_goback,      (DWORD)can_goforward,
-    (DWORD)goback,          (DWORD)goforward,
-    (DWORD)reload,          (DWORD)stop,
-    (DWORD)isloading,       (DWORD)load_url,
-    (DWORD)get_url,         (DWORD)get_title,
-    (DWORD)focus,           (DWORD)set_visible,
-    (DWORD)get_visible,     (DWORD)get_user_data,
-    (DWORD)get_frame_count, (DWORD)get_frame_identifiers,
-    (DWORD)get_frame_names, (DWORD)get_frame_by_name,
-    (DWORD)get_frame_by_id, (DWORD)get_main_frame,
+    (DWORD)is_same,
+    (DWORD)is_valid,
+    (DWORD)get_env,
+    (DWORD)get_profile,
+    (DWORD)get_hwnd,
+    (DWORD)close,
+    (DWORD)can_goback,
+    (DWORD)can_goforward,
+    (DWORD)goback,
+    (DWORD)goforward,
+    (DWORD)reload,
+    (DWORD)stop,
+    (DWORD)isloading,
+    (DWORD)load_url,
+    (DWORD)get_url,
+    (DWORD)get_title,
+    (DWORD)focus,
+    (DWORD)set_visible,
+    (DWORD)get_visible,
+    (DWORD)get_user_data,
+    (DWORD)get_frame_count,
+    (DWORD)get_frame_identifiers,
+    (DWORD)get_frame_names,
+    (DWORD)get_frame_by_name,
+    (DWORD)get_frame_by_id,
+    (DWORD)get_main_frame,
+    (DWORD)set_browser_settings,
+    (DWORD)key_event,
+    (DWORD)mouse_click_event,
+    (DWORD)mouse_move_event,
+    (DWORD)mouse_wheel_event,
+    (DWORD)mute_audio,
+    (DWORD)get_mute_audio,
+    (DWORD)toggle_devtools,
+    (DWORD)toggle_taskmanager,
+    (DWORD)toggle_findbar,
+    (DWORD)zoom_page,
 };
 
 DWORD acf_cpp_fntable_new_window_delegate[] = {
@@ -223,7 +294,9 @@ namespace {
 
 bool ACF_CALLBACK frame_is_valid(AcfFrame* obj) { return obj->IsValid(); }
 
-bool ACF_CALLBACK frame_is_same(AcfFrame* obj, AcfFrame* that) { return obj->IsSame(that); }
+bool ACF_CALLBACK frame_is_same(AcfFrame* obj, AcfFrame* that) {
+  return obj->IsSame(that);
+}
 
 BOOL ACF_CALLBACK frame_get_parent(AcfFrame* obj, DWORD* retObj) {
   AcfRefPtr<AcfFrame> frame = obj->GetParent();
@@ -279,7 +352,8 @@ class ExecJsCallback : public AcfCompleteValueHandler {
   IMPLEMENT_REFCOUNTING(ExecJsCallback);
 };
 
-BOOL ACF_CALLBACK frame_execute_javascript(AcfFrame* obj, LPCSTR script, LPCSTR url, DWORD* retObj) {
+BOOL ACF_CALLBACK frame_execute_javascript(AcfFrame* obj, LPCSTR script,
+                                           LPCSTR url, DWORD* retObj) {
   std::unique_ptr<std::atomic<bool>> notify =
       std::make_unique<std::atomic<bool>>(false);
   AcfRefPtr<ExecJsCallback> lpHandler = new ExecJsCallback(notify.get());
@@ -329,7 +403,7 @@ void ACF_CALLBACK frame_get_source(AcfFrame* obj, LPSTR* retStr) {
   obj->GetSource(lpHandler);
 
   while (!*notify) {
-    ::Sleep(10);
+    ::Sleep(0);
   }
 
   *retStr = GetEString(lpHandler->GetResult());
@@ -342,17 +416,18 @@ void ACF_CALLBACK frame_get_text(AcfFrame* obj, LPSTR* retStr) {
   obj->GetText(lpHandler);
 
   while (!*notify) {
-    ::Sleep(10);
+    ::Sleep(0);
   }
 
   *retStr = GetEString(lpHandler->GetResult());
 }
 
-} // namespace
+}  // namespace
 
 DWORD acf_cpp_fntable_frame[] = {
-    (DWORD)frame_is_valid, (DWORD)frame_is_same,  (DWORD)frame_get_parent,
-    (DWORD)frame_get_browser, (DWORD)frame_get_url,  (DWORD)frame_get_id,
+    (DWORD)frame_is_valid,   (DWORD)frame_is_same,
+    (DWORD)frame_get_parent, (DWORD)frame_get_browser,
+    (DWORD)frame_get_url,    (DWORD)frame_get_id,
     (DWORD)frame_is_main,    (DWORD)frame_execute_javascript,
     (DWORD)frame_get_source, (DWORD)frame_get_text,
 };

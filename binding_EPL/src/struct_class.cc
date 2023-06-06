@@ -17,6 +17,12 @@ DWORD m_pVfTable_AuthCallback;
 DWORD m_pVfTable_MenuCallback;
 DWORD m_pVfTable_MenuParams;
 DWORD m_pVfTable_MenuModel;
+DWORD m_pVfTable_Request;
+DWORD m_pVfTable_Response;
+DWORD m_pVfTable_PostData;
+DWORD m_pVfTable_PostDataElements;
+DWORD m_pVfTable_ResponseCallback;
+DWORD m_pVfTable_ResponseFilter;
 
 }  // namespace eClass
 
@@ -65,6 +71,24 @@ DLL_EXPORTS(RegisterClass, void)(DWORD **pNewClass, EClassVTable nType) {
         break;
       case EClassVTable::VT_MENUMODEL:
         eClass::m_pVfTable_MenuModel = dwVfptr;
+        break;
+      case EClassVTable::VT_REQUEST:
+        eClass::m_pVfTable_Request = dwVfptr;
+        break;
+      case EClassVTable::VT_RESPONSE:
+        eClass::m_pVfTable_Response = dwVfptr;
+        break;
+      case EClassVTable::VT_POSTDATA:
+        eClass::m_pVfTable_PostData = dwVfptr;
+        break;
+      case EClassVTable::VT_POSTDATAELEMENTS:
+        eClass::m_pVfTable_PostDataElements = dwVfptr;
+        break;
+      case EClassVTable::VT_RESPONSECALLBACK:
+        eClass::m_pVfTable_ResponseCallback = dwVfptr;
+        break;
+      case EClassVTable::VT_RESPONSEFILTER:
+        eClass::m_pVfTable_ResponseFilter = dwVfptr;
         break;
 
       default:

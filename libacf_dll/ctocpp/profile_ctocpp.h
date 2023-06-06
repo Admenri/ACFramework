@@ -7,7 +7,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=b836fec069c20d017ce7841e9b42cea729103272$
+// $hash=9ee8aa46ad7506137655ceb66ef272b3d4fe31a7$
 //
 
 #ifndef ACF_CTOCPP_PROFILE_CTOCPP_H_
@@ -35,6 +35,7 @@ class AcfProfileCToCpp
   // AcfProfile methods.
   AcfRefPtr<AcfEnvironment> GetEnvironment() override;
   bool IsValid() override;
+  bool IsSame(AcfRefPtr<AcfProfile> that) override;
   AcfString GetPath() override;
   void SetPreference(const AcfString& name,
                      AcfRefPtr<AcfValue> value,

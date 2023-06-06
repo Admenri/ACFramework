@@ -7,7 +7,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=9c624c6fd5ea27168e5e3e72fc9d1d7101a9cf0b$
+// $hash=836a950cd8979b438a7e4646ea30cae0bb3d40c5$
 //
 
 #ifndef ACF_CTOCPP_BROWSER_CTOCPP_H_
@@ -63,6 +63,7 @@ class AcfBrowserCToCpp
   AcfRefPtr<AcfFrame> GetFrame(int64 identifier) override;
   AcfRefPtr<AcfFrame> GetFrame(const AcfString& name) override;
   AcfRefPtr<AcfFrame> GetMainFrame() override;
+  void SetSettings(const AcfBrowserSettings& settings) override;
   void SendKeyEvent(const AcfKeyEvent& event) override;
   void SendMouseClickEvent(const AcfMouseEvent& event,
                            MouseButtonType type,

@@ -5,7 +5,7 @@
 // by hand. See the translator.README.txt file in the tools directory for
 // more information.
 //
-// $hash=dcd502993145ff3885d3ba8afc7a0921277c9804$
+// $hash=0b2e955d123a37f6995984e379956d0d425d762a$
 //
 
 #ifndef ACF_INCLUDE_CAPI_ACF_ENVIRONMENT_CAPI_H_
@@ -14,6 +14,9 @@
 
 #include "include/capi/acf_browser_capi.h"
 #include "include/capi/acf_profile_capi.h"
+#include "include/capi/acf_request_capi.h"
+#include "include/capi/acf_resource_request_handler_capi.h"
+#include "include/capi/acf_response_capi.h"
 #include "include/capi/acf_values_capi.h"
 #include "include/internal/acf_def.h"
 #include "include/internal/acf_scoped_refptr.h"
@@ -31,7 +34,12 @@ struct _acf_cookie_t;
 struct _acf_dictionary_value_t;
 struct _acf_environment_t;
 struct _acf_list_value_t;
+struct _acf_post_data_element_t;
+struct _acf_post_data_t;
 struct _acf_profile_t;
+struct _acf_request_t;
+struct _acf_resource_request_handler_t;
+struct _acf_response_t;
 struct _acf_value_t;
 
 ///
@@ -49,6 +57,33 @@ typedef struct _acf_environment_handler_t {
   void(ACF_CALLBACK* on_initialized)(struct _acf_environment_handler_t* self,
                                      struct _acf_environment_t* env,
                                      int success);
+
+  ///
+  /// Called on the browser process IO thread before a resource request is
+  /// initiated. The |browser| and |frame| values represent the source of the
+  /// request. |request| represents the request contents and cannot be modified
+  /// in this callback. |is_navigation| will be true (1) if the resource request
+  /// is a navigation. |is_download| will be true (1) if the resource request is
+  /// a download. |request_initiator| is the origin (scheme + domain) of the
+  /// page that initiated the request. Set |disable_default_handling| to true
+  /// (1) to disable default handling of the request, in which case it will need
+  /// to be handled via acf_resource_request_handler_t::GetResourceHandler or it
+  /// will be canceled. To allow the resource load to proceed with default
+  /// handling return NULL. To specify a handler for the resource return a
+  /// acf_resource_request_handler_t object. If this callback returns NULL the
+  /// same function will be called on the associated
+  /// acf_request_tContextHandler, if any.
+  ///
+  struct _acf_resource_request_handler_t*(
+      ACF_CALLBACK* get_resource_request_handler)(
+      struct _acf_environment_handler_t* self,
+      struct _acf_profile_t* profile,
+      int64 frame_id,
+      struct _acf_request_t* request,
+      int is_navigation,
+      int is_download,
+      const acf_string_t* request_initiator,
+      int* block_request);
 } acf_environment_handler_t;
 
 ///
@@ -88,7 +123,7 @@ typedef struct _acf_environment_t {
   ///
   /// Get Browser Process PID
   ///
-  uint32(ACF_CALLBACK* get_process_pid)(struct _acf_environment_t* self);
+  uint64(ACF_CALLBACK* get_process_pid)(struct _acf_environment_t* self);
 
   ///
   /// Quit and wait for browser process return process exit code
@@ -170,6 +205,27 @@ ACF_EXPORT struct _acf_list_value_t* acf_environment_create_list(void);
 /// Create a default cookie data.
 ///
 ACF_EXPORT struct _acf_cookie_t* acf_environment_create_cookie(void);
+
+///
+/// Create a new CefRequest object.
+///
+ACF_EXPORT struct _acf_request_t* acf_environment_create_request(void);
+
+///
+/// Create a new CefPostData object.
+///
+ACF_EXPORT struct _acf_post_data_t* acf_environment_create_post_data(void);
+
+///
+/// Create a new acf_post_data_element_t object.
+///
+ACF_EXPORT struct _acf_post_data_element_t*
+acf_environment_create_post_data_element(void);
+
+///
+/// Create a new acf_response_t object.
+///
+ACF_EXPORT struct _acf_response_t* acf_environment_create_response(void);
 
 #ifdef __cplusplus
 }

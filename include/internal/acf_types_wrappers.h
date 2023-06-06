@@ -101,6 +101,7 @@ struct AcfEnvironmentSettingsTraits {
   static inline void clear(struct_type* s) {
     acf_string_clear(&s->command_line);
     acf_string_clear(&s->user_data_dir);
+    s->no_sandbox = false;
   }
 
   static inline void set(const struct_type* src,
@@ -110,6 +111,7 @@ struct AcfEnvironmentSettingsTraits {
                    &target->command_line, copy);
     acf_string_set(src->user_data_dir.str, src->user_data_dir.length,
                    &target->user_data_dir, copy);
+    target->no_sandbox = src->no_sandbox;
   }
 };
 using AcfEnvironmentSettings = AcfStructBase<AcfEnvironmentSettingsTraits>;
@@ -153,6 +155,16 @@ class AcfMouseEvent : public acf_mouse_event_t {
  public:
   AcfMouseEvent() : acf_mouse_event_t{} {}
   AcfMouseEvent(const acf_mouse_event_t& r) : acf_mouse_event_t(r) {}
+};
+
+///
+/// Class defined browser settings wrapper
+///
+class AcfBrowserSettings : public acf_browser_settings_t {
+ public:
+  AcfBrowserSettings() : acf_browser_settings_t{} {}
+  AcfBrowserSettings(const acf_browser_settings_t& r)
+      : acf_browser_settings_t(r) {}
 };
 
 #endif  // ACF_TYPES_WRAPPERS_H_

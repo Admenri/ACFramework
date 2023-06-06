@@ -7,11 +7,14 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=90bf8f9af4053232a8e5fdce49503e4500eb09b8$
+// $hash=f8fd1549db6e0bca6995c0061d59b954ec0e0f3a$
 //
 
 #include "libacf_dll/cpptoc/environment_handler_cpptoc.h"
+#include "libacf_dll/cpptoc/resource_request_handler_cpptoc.h"
 #include "libacf_dll/ctocpp/environment_ctocpp.h"
+#include "libacf_dll/ctocpp/profile_ctocpp.h"
+#include "libacf_dll/ctocpp/request_ctocpp.h"
 
 namespace {
 
@@ -34,12 +37,58 @@ environment_handler_on_initialized(struct _acf_environment_handler_t* self,
       AcfEnvironmentCToCpp::Wrap(env), success ? true : false);
 }
 
+struct _acf_resource_request_handler_t* ACF_CALLBACK
+environment_handler_get_resource_request_handler(
+    struct _acf_environment_handler_t* self,
+    struct _acf_profile_t* profile,
+    int64 frame_id,
+    struct _acf_request_t* request,
+    int is_navigation,
+    int is_download,
+    const acf_string_t* request_initiator,
+    int* block_request) {
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  if (!self)
+    return NULL;
+  // Verify param: profile; type: refptr_diff
+  if (!profile)
+    return NULL;
+  // Verify param: request; type: refptr_diff
+  if (!request)
+    return NULL;
+  // Verify param: block_request; type: bool_byref
+  if (!block_request)
+    return NULL;
+  // Unverified params: request_initiator
+
+  // Translate param: block_request; type: bool_byref
+  bool block_requestBool = (block_request && *block_request) ? true : false;
+
+  // Execute
+  AcfRefPtr<AcfResourceRequestHandler> _retval =
+      AcfEnvironmentHandlerCppToC::Get(self)->GetResourceRequestHandler(
+          AcfProfileCToCpp::Wrap(profile), frame_id,
+          AcfRequestCToCpp::Wrap(request), is_navigation ? true : false,
+          is_download ? true : false, AcfString(request_initiator),
+          block_requestBool);
+
+  // Restore param: block_request; type: bool_byref
+  if (block_request)
+    *block_request = block_requestBool ? true : false;
+
+  // Return type: refptr_same
+  return AcfResourceRequestHandlerCppToC::Wrap(_retval);
+}
+
 }  // namespace
 
 // CONSTRUCTOR - Do not edit by hand.
 
 AcfEnvironmentHandlerCppToC::AcfEnvironmentHandlerCppToC() {
   GetStruct()->on_initialized = environment_handler_on_initialized;
+  GetStruct()->get_resource_request_handler =
+      environment_handler_get_resource_request_handler;
 }
 
 // DESTRUCTOR - Do not edit by hand.

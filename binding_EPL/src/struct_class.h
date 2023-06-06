@@ -25,6 +25,12 @@ enum class EClassVTable {
   VT_MENUCALLBACK,
   VT_MENUPARAMS,
   VT_MENUMODEL,
+  VT_REQUEST,
+  VT_RESPONSE,
+  VT_POSTDATA,
+  VT_POSTDATAELEMENTS,
+  VT_RESPONSECALLBACK,
+  VT_RESPONSEFILTER,
 };
 
 DLL_EXPORTS(RegisterClass, void)(DWORD **pNewClass, EClassVTable nType);
@@ -53,6 +59,12 @@ extern DWORD m_pVfTable_AuthCallback;
 extern DWORD m_pVfTable_MenuCallback;
 extern DWORD m_pVfTable_MenuParams;
 extern DWORD m_pVfTable_MenuModel;
+extern DWORD m_pVfTable_Request;
+extern DWORD m_pVfTable_Response;
+extern DWORD m_pVfTable_PostData;
+extern DWORD m_pVfTable_PostDataElements;
+extern DWORD m_pVfTable_ResponseCallback;
+extern DWORD m_pVfTable_ResponseFilter;
 
 }  // namespace eClass
 

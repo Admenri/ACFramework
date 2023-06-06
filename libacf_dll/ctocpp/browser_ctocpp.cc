@@ -7,7 +7,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=fdc17c50c32359d78d2f14bd476dba179030f961$
+// $hash=9dc32da5e7b8ca71624e9878639be12d4f6e857c$
 //
 
 #include "libacf_dll/ctocpp/browser_ctocpp.h"
@@ -420,6 +420,17 @@ AcfRefPtr<AcfFrame> AcfBrowserCToCpp::GetMainFrame() {
 
   // Return type: refptr_same
   return AcfFrameCToCpp::Wrap(_retval);
+}
+
+void AcfBrowserCToCpp::SetSettings(const AcfBrowserSettings& settings) {
+  acf_browser_t* _struct = GetStruct();
+  if (ACF_MEMBER_MISSING(_struct, set_settings))
+    return;
+
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  // Execute
+  _struct->set_settings(_struct, &settings);
 }
 
 void AcfBrowserCToCpp::SendKeyEvent(const AcfKeyEvent& event) {

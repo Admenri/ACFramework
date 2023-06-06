@@ -9,7 +9,9 @@
 #include "include/acf_environment.h"
 #include "include/acf_frame.h"
 #include "include/acf_values.h"
+#include "include/acf_request.h"
 
+class AcfCallback;
 class AcfEnvironment;
 class AcfBrowser;
 class AcfNewWindowDelegate;
@@ -18,6 +20,7 @@ class AcfFrame;
 class AcfLoginDelegate;
 class AcfContextMenuCallback;
 class AcfDictionaryValue;
+class AcfRequest;
 
 ///
 /// Browser event list handler model
@@ -183,6 +186,18 @@ class AcfBrowserHandler : public virtual AcfBaseRefCounted {
   /*--acf()--*/
   virtual void DidMuteStateUpdate(AcfRefPtr<AcfBrowser> browser, bool muted) {}
 
+  ///
+  /// Async running on browser navigation request, default: Continue(false).
+  /// The request object is readonly without any post data and cookie data.
+  ///
+  /*--acf()--*/
+  virtual void OnBeforeNavigation(AcfRefPtr<AcfBrowser> browser,
+                                  AcfRefPtr<AcfFrame> frame,
+                                  AcfRefPtr<AcfRequest> request,
+                                  bool user_gesture,
+                                  bool is_redirect,
+                                  AcfRefPtr<AcfCallback> callback) {}
+  
 };
 
 #endif  // ACF_BROWSER_HANDLER_H_

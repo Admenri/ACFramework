@@ -5,7 +5,7 @@
 // by hand. See the translator.README.txt file in the tools directory for
 // more information.
 //
-// $hash=2fc3f01a533a5c7e43defea9ff2b156f5ee49aaf$
+// $hash=99d55143e19423fc80bcdcd2ca8b396ae0f0c500$
 //
 
 #ifndef ACF_INCLUDE_CAPI_ACF_BROWSER_CAPI_H_
@@ -202,6 +202,12 @@ typedef struct _acf_browser_t {
   ///
   struct _acf_frame_t*(ACF_CALLBACK* get_main_frame)(
       struct _acf_browser_t* self);
+
+  ///
+  /// Set browser additional settings. (Dynamic)
+  ///
+  void(ACF_CALLBACK* set_settings)(struct _acf_browser_t* self,
+                                   const acf_browser_settings_t* settings);
 
   ///
   /// Send a key event to the browser.

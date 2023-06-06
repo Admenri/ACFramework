@@ -5,7 +5,7 @@
 // by hand. See the translator.README.txt file in the tools directory for
 // more information.
 //
-// $hash=ccff50c259f10f7f85a55770dbabfc34d2e564db$
+// $hash=9b0bd507c304aa99b18ef003160f4a3516873a4a$
 //
 
 #ifndef ACF_INCLUDE_CAPI_ACF_PROFILE_CAPI_H_
@@ -52,6 +52,12 @@ typedef struct _acf_profile_t {
   /// Get object remote state
   ///
   int(ACF_CALLBACK* is_valid)(struct _acf_profile_t* self);
+
+  ///
+  /// Is same object
+  ///
+  int(ACF_CALLBACK* is_same)(struct _acf_profile_t* self,
+                             struct _acf_profile_t* that);
 
   ///
   /// Get profile storage path

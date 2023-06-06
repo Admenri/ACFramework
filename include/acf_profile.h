@@ -41,6 +41,12 @@ class AcfProfile : public virtual AcfBaseRefCounted {
   virtual bool IsValid() = 0;
 
   ///
+  /// Is same object
+  ///
+  /*--acf()--*/
+  virtual bool IsSame(AcfRefPtr<AcfProfile> that) = 0;
+
+  ///
   /// Get profile storage path
   ///
   /*--acf()--*/

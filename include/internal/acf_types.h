@@ -22,6 +22,9 @@ typedef struct _acf_environment_settings_t {
 
   /// The chromium's cache & userdata dir
   acf_string_t user_data_dir;
+
+  /// Sandbox info
+  bool no_sandbox;
 } acf_environment_settings_t;
 
 /// Browser create params
@@ -65,35 +68,6 @@ typedef struct _acf_mouse_event_t {
   ///
   uint32 modifiers;
 } acf_mouse_event_t;
-
-///
-/// Key event types.
-///
-typedef enum {
-  ///
-  /// Notification that a key transitioned from "up" to "down".
-  ///
-  KEYEVENT_RAWKEYDOWN = 0,
-
-  ///
-  /// Notification that a key was pressed. This does not necessarily correspond
-  /// to a character depending on the key and language. Use KEYEVENT_CHAR for
-  /// character input.
-  ///
-  KEYEVENT_KEYDOWN,
-
-  ///
-  /// Notification that a key was released.
-  ///
-  KEYEVENT_KEYUP,
-
-  ///
-  /// Notification that a character was typed. Use this for text input. Key
-  /// down events may generate 0, 1, or more than one character event depending
-  /// on the key, locale, and operating system.
-  ///
-  KEYEVENT_CHAR
-} acf_key_event_type_t;
 
 ///
 /// Structure representing keyboard event information.
@@ -147,6 +121,21 @@ typedef struct _acf_key_event_t {
   ///
   int focus_on_editable_field;
 } acf_key_event_t;
+
+///
+/// Structure browser dynamic settings.
+///
+typedef struct _acf_browser_settings_t {
+  ///
+  /// Browser file drag-in controller
+  ///
+  bool disable_drag_file;
+
+  ///
+  /// Browser window default accelerator controller
+  ///
+  bool disable_accelerator;
+} acf_browser_settings_t;
 
 #ifdef __cplusplus
 }

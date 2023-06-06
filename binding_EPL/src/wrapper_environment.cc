@@ -78,7 +78,7 @@ DLL_EXPORTS(CreateEnvironment, BOOL)
 
   if (sync) {
     while (!env->IsValid()) {
-      ::Sleep(10);
+      ::Sleep(0);
     }
   }
 
@@ -125,7 +125,7 @@ BOOL ACF_CALLBACK create_profile(AcfEnvironment* obj, LPCSTR path, bool sync,
   // Wait for thread synchronize
   if (sync) {
     while (!profile->IsValid()) {
-      ::Sleep(10);
+      ::Sleep(0);
     }
   }
 

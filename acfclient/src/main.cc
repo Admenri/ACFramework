@@ -4,6 +4,7 @@
 
 #include "client_window.h"
 #include "message_loop_manager.h"
+#include "resource_handler.h"
 
 #include "include/acf_environment.h"
 
@@ -32,6 +33,14 @@ class TestEnvHandler : public AcfEnvironmentHandler {
   ~TestEnvHandler() override { std::cout << "Quit Handler\n"; }
 
   void OnInitialized(AcfRefPtr<AcfEnvironment> env, bool success) override;
+  AcfRefPtr<AcfResourceRequestHandler> GetResourceRequestHandler(
+      AcfRefPtr<AcfProfile> profile,
+      int64 frame_id,
+      AcfRefPtr<AcfRequest> request,
+      bool is_navigation,
+      bool is_download,
+      const AcfString& request_initiator,
+      bool& block_request) override;
 
   IMPLEMENT_REFCOUNTING(TestEnvHandler);
 };
@@ -41,17 +50,27 @@ void TestEnvHandler::OnInitialized(AcfRefPtr<AcfEnvironment> env, bool success) 
 
   g_profile = env->CreateProfile("TestCPP", nullptr);
 
-  std::cout << "OnInitialized 1\n";
   while (!g_profile->IsValid())
     ::Sleep(0);
-  std::cout << "OnInitialized 2\n";
 
   AcfRefPtr<TestTask> task = new TestTask();
   msg_dispatcher->PostTask(task);
 }
 
+AcfRefPtr<AcfResourceRequestHandler> TestEnvHandler::GetResourceRequestHandler(
+    AcfRefPtr<AcfProfile> profile,
+    int64 frame_id,
+    AcfRefPtr<AcfRequest> request,
+    bool is_navigation,
+    bool is_download,
+    const AcfString& request_initiator,
+    bool& block_request) {
+  return new TestResourceRequestHandler();
+}
+
 void InitEnv(int argc, char** argv) {
   AcfEnvironmentSettings settings;
+  settings.no_sandbox = true;
 
   if (argc > 2) {
     for (int i = 1; i <= argc - 1; i++) {

@@ -15,12 +15,18 @@
     <ClCompile Include="src\message_loop_manager.cc">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\resource_handler.cc">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\client_window.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\message_loop_manager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource_handler.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

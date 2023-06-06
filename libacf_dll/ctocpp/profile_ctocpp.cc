@@ -7,7 +7,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=c929db7ef49207fcaf1974771d257656a10d1edd$
+// $hash=08ff7c4008f83999767a4a8519a44f467be6cba4$
 //
 
 #include "libacf_dll/ctocpp/profile_ctocpp.h"
@@ -41,6 +41,24 @@ bool AcfProfileCToCpp::IsValid() {
 
   // Execute
   int _retval = _struct->is_valid(_struct);
+
+  // Return type: bool
+  return _retval ? true : false;
+}
+
+bool AcfProfileCToCpp::IsSame(AcfRefPtr<AcfProfile> that) {
+  acf_profile_t* _struct = GetStruct();
+  if (ACF_MEMBER_MISSING(_struct, is_same))
+    return false;
+
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  // Verify param: that; type: refptr_same
+  if (!that.get())
+    return false;
+
+  // Execute
+  int _retval = _struct->is_same(_struct, AcfProfileCToCpp::Unwrap(that));
 
   // Return type: bool
   return _retval ? true : false;

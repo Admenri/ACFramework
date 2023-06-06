@@ -5,7 +5,7 @@
 // by hand. See the translator.README.txt file in the tools directory for
 // more information.
 //
-// $hash=388063a369ca037cba72c13c89de6d1801d27b62$
+// $hash=3647fe654401e170052fe319a5ee712f1cfa628b$
 //
 
 #ifndef ACF_INCLUDE_CAPI_ACF_CALLBACK_CAPI_H_
@@ -84,6 +84,21 @@ typedef struct _acf_number_complete_handler_t {
   void(ACF_CALLBACK* on_complete)(struct _acf_number_complete_handler_t* self,
                                   int value);
 } acf_number_complete_handler_t;
+
+///
+/// Complete event callback generic
+///
+typedef struct _acf_callback_t {
+  ///
+  /// Base structure.
+  ///
+  acf_base_ref_counted_t base;
+
+  ///
+  /// Continue process event
+  ///
+  void(ACF_CALLBACK* cont)(struct _acf_callback_t* self, int cancel);
+} acf_callback_t;
 
 #ifdef __cplusplus
 }

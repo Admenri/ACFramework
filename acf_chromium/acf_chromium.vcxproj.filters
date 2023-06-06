@@ -8,7 +8,7 @@
       <UniqueIdentifier>{4592863e-7922-4ebe-a4e1-b09011c0075e}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\ctocpp">
-      <UniqueIdentifier>{01333199-bbea-4bd7-8922-a279054e1935}</UniqueIdentifier>
+      <UniqueIdentifier>{d9df90da-1733-420a-87cf-8f8efff1f5cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -25,6 +25,9 @@
       <Filter>src\cpptoc</Filter>
     </ClCompile>
     <ClCompile Include="..\libacf_dll\cpptoc\browser_handler_cpptoc.cc">
+      <Filter>src\cpptoc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\cpptoc\callback_cpptoc.cc">
       <Filter>src\cpptoc</Filter>
     </ClCompile>
     <ClCompile Include="..\libacf_dll\cpptoc\complete_handler_cpptoc.cc">
@@ -75,7 +78,34 @@
     <ClCompile Include="..\libacf_dll\cpptoc\number_complete_handler_cpptoc.cc">
       <Filter>src\cpptoc</Filter>
     </ClCompile>
+    <ClCompile Include="..\libacf_dll\cpptoc\post_data_cpptoc.cc">
+      <Filter>src\cpptoc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\cpptoc\post_data_element_cpptoc.cc">
+      <Filter>src\cpptoc</Filter>
+    </ClCompile>
     <ClCompile Include="..\libacf_dll\cpptoc\profile_cpptoc.cc">
+      <Filter>src\cpptoc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\cpptoc\request_cpptoc.cc">
+      <Filter>src\cpptoc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\cpptoc\resource_handler_cpptoc.cc">
+      <Filter>src\cpptoc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\cpptoc\resource_read_callback_cpptoc.cc">
+      <Filter>src\cpptoc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\cpptoc\resource_request_handler_cpptoc.cc">
+      <Filter>src\cpptoc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\cpptoc\resource_skip_callback_cpptoc.cc">
+      <Filter>src\cpptoc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\cpptoc\response_cpptoc.cc">
+      <Filter>src\cpptoc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\cpptoc\response_filter_cpptoc.cc">
       <Filter>src\cpptoc</Filter>
     </ClCompile>
     <ClCompile Include="..\libacf_dll\cpptoc\string_visitor_cpptoc.cc">
@@ -91,6 +121,9 @@
       <Filter>src\ctocpp</Filter>
     </ClCompile>
     <ClCompile Include="..\libacf_dll\ctocpp\browser_handler_ctocpp.cc">
+      <Filter>src\ctocpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\ctocpp\callback_ctocpp.cc">
       <Filter>src\ctocpp</Filter>
     </ClCompile>
     <ClCompile Include="..\libacf_dll\ctocpp\complete_handler_ctocpp.cc">
@@ -144,7 +177,34 @@
     <ClCompile Include="..\libacf_dll\ctocpp\number_complete_handler_ctocpp.cc">
       <Filter>src\ctocpp</Filter>
     </ClCompile>
+    <ClCompile Include="..\libacf_dll\ctocpp\post_data_ctocpp.cc">
+      <Filter>src\ctocpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\ctocpp\post_data_element_ctocpp.cc">
+      <Filter>src\ctocpp</Filter>
+    </ClCompile>
     <ClCompile Include="..\libacf_dll\ctocpp\profile_ctocpp.cc">
+      <Filter>src\ctocpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\ctocpp\request_ctocpp.cc">
+      <Filter>src\ctocpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\ctocpp\resource_handler_ctocpp.cc">
+      <Filter>src\ctocpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\ctocpp\resource_read_callback_ctocpp.cc">
+      <Filter>src\ctocpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\ctocpp\resource_request_handler_ctocpp.cc">
+      <Filter>src\ctocpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\ctocpp\resource_skip_callback_ctocpp.cc">
+      <Filter>src\ctocpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\ctocpp\response_ctocpp.cc">
+      <Filter>src\ctocpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libacf_dll\ctocpp\response_filter_ctocpp.cc">
       <Filter>src\ctocpp</Filter>
     </ClCompile>
     <ClCompile Include="..\libacf_dll\ctocpp\string_visitor_ctocpp.cc">
@@ -171,6 +231,9 @@
       <Filter>src\cpptoc</Filter>
     </ClInclude>
     <ClInclude Include="..\libacf_dll\cpptoc\browser_handler_cpptoc.h">
+      <Filter>src\cpptoc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\cpptoc\callback_cpptoc.h">
       <Filter>src\cpptoc</Filter>
     </ClInclude>
     <ClInclude Include="..\libacf_dll\cpptoc\complete_handler_cpptoc.h">
@@ -227,7 +290,34 @@
     <ClInclude Include="..\libacf_dll\cpptoc\number_complete_handler_cpptoc.h">
       <Filter>src\cpptoc</Filter>
     </ClInclude>
+    <ClInclude Include="..\libacf_dll\cpptoc\post_data_cpptoc.h">
+      <Filter>src\cpptoc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\cpptoc\post_data_element_cpptoc.h">
+      <Filter>src\cpptoc</Filter>
+    </ClInclude>
     <ClInclude Include="..\libacf_dll\cpptoc\profile_cpptoc.h">
+      <Filter>src\cpptoc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\cpptoc\request_cpptoc.h">
+      <Filter>src\cpptoc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\cpptoc\resource_handler_cpptoc.h">
+      <Filter>src\cpptoc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\cpptoc\resource_read_callback_cpptoc.h">
+      <Filter>src\cpptoc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\cpptoc\resource_request_handler_cpptoc.h">
+      <Filter>src\cpptoc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\cpptoc\resource_skip_callback_cpptoc.h">
+      <Filter>src\cpptoc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\cpptoc\response_cpptoc.h">
+      <Filter>src\cpptoc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\cpptoc\response_filter_cpptoc.h">
       <Filter>src\cpptoc</Filter>
     </ClInclude>
     <ClInclude Include="..\libacf_dll\cpptoc\string_visitor_cpptoc.h">
@@ -243,6 +333,9 @@
       <Filter>src\ctocpp</Filter>
     </ClInclude>
     <ClInclude Include="..\libacf_dll\ctocpp\browser_handler_ctocpp.h">
+      <Filter>src\ctocpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\ctocpp\callback_ctocpp.h">
       <Filter>src\ctocpp</Filter>
     </ClInclude>
     <ClInclude Include="..\libacf_dll\ctocpp\complete_handler_ctocpp.h">
@@ -302,7 +395,34 @@
     <ClInclude Include="..\libacf_dll\ctocpp\number_complete_handler_ctocpp.h">
       <Filter>src\ctocpp</Filter>
     </ClInclude>
+    <ClInclude Include="..\libacf_dll\ctocpp\post_data_ctocpp.h">
+      <Filter>src\ctocpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\ctocpp\post_data_element_ctocpp.h">
+      <Filter>src\ctocpp</Filter>
+    </ClInclude>
     <ClInclude Include="..\libacf_dll\ctocpp\profile_ctocpp.h">
+      <Filter>src\ctocpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\ctocpp\request_ctocpp.h">
+      <Filter>src\ctocpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\ctocpp\resource_handler_ctocpp.h">
+      <Filter>src\ctocpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\ctocpp\resource_read_callback_ctocpp.h">
+      <Filter>src\ctocpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\ctocpp\resource_request_handler_ctocpp.h">
+      <Filter>src\ctocpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\ctocpp\resource_skip_callback_ctocpp.h">
+      <Filter>src\ctocpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\ctocpp\response_ctocpp.h">
+      <Filter>src\ctocpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libacf_dll\ctocpp\response_filter_ctocpp.h">
       <Filter>src\ctocpp</Filter>
     </ClInclude>
     <ClInclude Include="..\libacf_dll\ctocpp\string_visitor_ctocpp.h">

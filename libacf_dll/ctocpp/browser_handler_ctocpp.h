@@ -7,7 +7,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=a49a916f9655f38874472e14f059c824a95afdbe$
+// $hash=283ff96614c67bedfa94b54bf2809054e008c126$
 //
 
 #ifndef ACF_CTOCPP_BROWSER_HANDLER_CTOCPP_H_
@@ -15,8 +15,22 @@
 #pragma once
 
 #include <vector>
+#include "include/acf_browser.h"
 #include "include/acf_browser_handler.h"
+#include "include/acf_callback.h"
+#include "include/acf_environment.h"
+#include "include/acf_frame.h"
+#include "include/acf_profile.h"
+#include "include/acf_request.h"
+#include "include/acf_values.h"
+#include "include/capi/acf_browser_capi.h"
 #include "include/capi/acf_browser_handler_capi.h"
+#include "include/capi/acf_callback_capi.h"
+#include "include/capi/acf_environment_capi.h"
+#include "include/capi/acf_frame_capi.h"
+#include "include/capi/acf_profile_capi.h"
+#include "include/capi/acf_request_capi.h"
+#include "include/capi/acf_values_capi.h"
 #include "libacf_dll/ctocpp/ctocpp_ref_counted.h"
 
 // Wrap a C structure with a C++ class.
@@ -87,6 +101,12 @@ class AcfBrowserHandlerCToCpp
                                double progress) override;
   void OnAudioStateChange(AcfRefPtr<AcfBrowser> browser, bool audible) override;
   void DidMuteStateUpdate(AcfRefPtr<AcfBrowser> browser, bool muted) override;
+  void OnBeforeNavigation(AcfRefPtr<AcfBrowser> browser,
+                          AcfRefPtr<AcfFrame> frame,
+                          AcfRefPtr<AcfRequest> request,
+                          bool user_gesture,
+                          bool is_redirect,
+                          AcfRefPtr<AcfCallback> callback) override;
 };
 
 #endif  // ACF_CTOCPP_BROWSER_HANDLER_CTOCPP_H_

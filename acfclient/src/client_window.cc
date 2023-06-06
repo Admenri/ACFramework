@@ -27,7 +27,8 @@
 #define IDC_ZoomOut 314
 #define IDC_TaskManager 315
 #define IDC_KeyEvent 316
-#define IDC_SetProxy 317
+#define IDC_MouseEvent 317
+#define IDC_SetProxy 318
 
 extern AcfRefPtr<AcfProfile> g_profile;
 extern AcfRefPtr<AcfEnvironment> g_env;
@@ -173,7 +174,7 @@ Window::Window(AcfRefPtr<AcfEnvironment> env,
   CreateMenu();
 
   if (IsWindow(window_)) {
-    std::cout << "[ACFClient] Window:" << (DWORD)window_ << "\n";
+    std::cout << "[ACFClient] Window:" << window_ << "\n";
   }
 
   params.parent = window_;
@@ -317,6 +318,7 @@ void Window::CreateMenu() {
   SET_MENU("ZoomReset", IDC_ZoomReset);
   SET_MENU("ZoomOut", IDC_ZoomOut);
   SET_MENU("Key Event", IDC_KeyEvent);
+  SET_MENU("Mouse Event", IDC_MouseEvent);
   SET_MENU("Set Proxy", IDC_SetProxy);
 }
 
@@ -465,10 +467,21 @@ bool Window::OnCommand(UINT id) {
         browser_weak_ptr_->SendKeyEvent(e);
       }
     } break;
+    case IDC_MouseEvent: {
+      if (browser_weak_ptr_) {
+        AcfMouseEvent e;
+        std::cout << "MouseXY: \n";
+        std::cin >> e.x >> e.y;
+        browser_weak_ptr_->SendMouseClickEvent(
+            e, AcfBrowser::MouseButtonType::MBT_LEFT, false, 1);
+        browser_weak_ptr_->SendMouseClickEvent(
+            e, AcfBrowser::MouseButtonType::MBT_LEFT, true, 1);
+      }
+    } break;
     case IDC_SetProxy: {
       if (browser_weak_ptr_) {
         AcfRefPtr<AcfDictionaryValue> dict = AcfEnvironment::CreateDictionary();
-        std::cout << "Enter Proxy: ";
+        std::cout << "Enter Proxy (- for empty): ";
         std::string proxy = "-";
         std::cin >> proxy;
 
@@ -751,6 +764,34 @@ void Window::OnLoadingProgressChange(AcfRefPtr<AcfBrowser> browser,
 void Window::OnAudioStateChange(AcfRefPtr<AcfBrowser> browser, bool audible) {
   std::cout << "AudioStateChanged: "
             << (audible ? std::string("true") : std::string("false")) << '\n';
+}
+
+void Window::OnLoadStart(AcfRefPtr<AcfBrowser> browser,
+                         AcfRefPtr<AcfFrame> frame,
+                         int transition) {
+  std::cout << "LoadStart: " << frame->GetURL().ToString() << '\n';
+}
+
+void Window::OnLoadEnd(AcfRefPtr<AcfBrowser> browser,
+                       AcfRefPtr<AcfFrame> frame,
+                       const AcfString& url,
+                       int http_status_code) {
+  std::cout << "LoadEnd: " << frame->GetURL().ToString() << '\n';
+}
+
+void Window::OnLoadError(AcfRefPtr<AcfBrowser> browser,
+                         AcfRefPtr<AcfFrame> frame,
+                         const AcfString& url,
+                         int error_code) {}
+
+void Window::OnBeforeNavigation(AcfRefPtr<AcfBrowser> browser,
+                                AcfRefPtr<AcfFrame> frame,
+                                AcfRefPtr<AcfRequest> request,
+                                bool user_gesture,
+                                bool is_redirect,
+                                AcfRefPtr<AcfCallback> callback) {
+  std::cout << "OnBeforeNavigation: URL: " << request->GetURL().ToString()
+            << '\n';
 }
 
 }  // namespace acfclient

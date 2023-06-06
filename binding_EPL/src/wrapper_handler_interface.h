@@ -11,13 +11,39 @@
 
 namespace wrapper {
 
-class EnvironmentHandler : public AcfEnvironmentHandler {
+class EnvironmentHandler : public AcfEnvironmentHandler,
+                           public AcfResourceRequestHandler {
  public:
   EnvironmentHandler(LPVOID callback);
   ~EnvironmentHandler();
 
  protected:
   void OnInitialized(AcfRefPtr<AcfEnvironment> env, bool success) override;
+  AcfRefPtr<AcfResourceRequestHandler> GetResourceRequestHandler(
+      AcfRefPtr<AcfProfile> profile, int64 frame_id,
+      AcfRefPtr<AcfRequest> request, bool is_navigation, bool is_download,
+      const AcfString& request_initiator, bool& block_request) override;
+
+  bool OnBeforeResourceLoad(AcfRefPtr<AcfProfile> profile, int64 frame_id,
+                            AcfRefPtr<AcfRequest> request) override;
+  AcfRefPtr<AcfResourceHandler> GetResourceHandler(
+      AcfRefPtr<AcfProfile> profile, int64 frame_id,
+      AcfRefPtr<AcfRequest> request) override;
+  void OnResourceRedirect(AcfRefPtr<AcfProfile> profile, int64 frame_id,
+                          AcfRefPtr<AcfRequest> request,
+                          AcfRefPtr<AcfResponse> response,
+                          AcfString& new_url) override;
+  void OnResourceResponse(AcfRefPtr<AcfProfile> profile, int64 frame_id,
+                          AcfRefPtr<AcfRequest> request,
+                          AcfRefPtr<AcfResponse> response) override;
+  AcfRefPtr<AcfResponseFilter> GetResourceResponseFilter(
+      AcfRefPtr<AcfProfile> profile, int64 frame_id,
+      AcfRefPtr<AcfRequest> request, AcfRefPtr<AcfResponse> response) override;
+  void OnResourceLoadComplete(AcfRefPtr<AcfProfile> profile, int64 frame_id,
+                              AcfRefPtr<AcfRequest> request,
+                              AcfRefPtr<AcfResponse> response,
+                              URLRequestStatus status,
+                              int64 received_content_length) override;
 
  private:
   LPVOID callback_;
@@ -65,6 +91,21 @@ class BrowserHandler : public AcfBrowserHandler {
                  const AcfString& url, int http_status_code) override;
   void OnLoadError(AcfRefPtr<AcfBrowser> browser, AcfRefPtr<AcfFrame> frame,
                    const AcfString& url, int error_code) override;
+
+  void OnFaviconURLChange(AcfRefPtr<AcfBrowser> browser,
+                          const std::vector<AcfString>& icon_urls) override;
+  void OnConsoleMessage(AcfRefPtr<AcfBrowser> browser, int level,
+                        const AcfString& message, const AcfString& source,
+                        int line, const AcfString& trace) override;
+  void OnLoadingProgressChange(AcfRefPtr<AcfBrowser> browser,
+                               double progress) override;
+  void OnAudioStateChange(AcfRefPtr<AcfBrowser> browser, bool audible) override;
+
+  void OnBeforeNavigation(AcfRefPtr<AcfBrowser> browser,
+                          AcfRefPtr<AcfFrame> frame,
+                          AcfRefPtr<AcfRequest> request, bool user_gesture,
+                          bool is_redirect,
+                          AcfRefPtr<AcfCallback> callback) override;
 
  private:
   LPVOID callback_;

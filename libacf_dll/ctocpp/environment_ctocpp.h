@@ -7,7 +7,7 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=6aaa22c9379feda852614ad316cc3735a28c10d5$
+// $hash=12a7e68b106befda06b8fd26c8865037314b222e$
 //
 
 #ifndef ACF_CTOCPP_ENVIRONMENT_CTOCPP_H_
@@ -18,11 +18,17 @@
 #include "include/acf_browser_handler.h"
 #include "include/acf_environment.h"
 #include "include/acf_profile.h"
+#include "include/acf_request.h"
+#include "include/acf_resource_request_handler.h"
+#include "include/acf_response.h"
 #include "include/acf_values.h"
 #include "include/capi/acf_browser_capi.h"
 #include "include/capi/acf_browser_handler_capi.h"
 #include "include/capi/acf_environment_capi.h"
 #include "include/capi/acf_profile_capi.h"
+#include "include/capi/acf_request_capi.h"
+#include "include/capi/acf_resource_request_handler_capi.h"
+#include "include/capi/acf_response_capi.h"
 #include "include/capi/acf_values_capi.h"
 #include "libacf_dll/ctocpp/ctocpp_ref_counted.h"
 
@@ -40,7 +46,7 @@ class AcfEnvironmentCToCpp : public AcfCToCppRefCounted<AcfEnvironmentCToCpp,
   bool IsValid() override;
   AcfRefPtr<AcfEnvironmentHandler> GetHandler() override;
   AcfString GetBrowserVersion() override;
-  uint32 GetProcessPID() override;
+  uint64 GetProcessPID() override;
   int Terminate() override;
   AcfRefPtr<AcfProfile> GetDefaultProfile() override;
   AcfRefPtr<AcfProfile> CreateProfile(

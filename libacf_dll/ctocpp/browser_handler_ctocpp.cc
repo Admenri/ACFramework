@@ -7,17 +7,19 @@
 // implementations. See the translator.README.txt file in the tools directory
 // for more information.
 //
-// $hash=ef858752f9915cb2d2f00d03e5930e370c49d6db$
+// $hash=86b4fe589aed71ab33af2e06c3c444c4d49ff036$
 //
 
 #include "libacf_dll/ctocpp/browser_handler_ctocpp.h"
 #include "libacf_dll/cpptoc/browser_cpptoc.h"
+#include "libacf_dll/cpptoc/callback_cpptoc.h"
 #include "libacf_dll/cpptoc/context_menu_callback_cpptoc.h"
 #include "libacf_dll/cpptoc/context_menu_model_cpptoc.h"
 #include "libacf_dll/cpptoc/context_menu_params_cpptoc.h"
 #include "libacf_dll/cpptoc/frame_cpptoc.h"
 #include "libacf_dll/cpptoc/login_delegate_cpptoc.h"
 #include "libacf_dll/cpptoc/new_window_delegate_cpptoc.h"
+#include "libacf_dll/cpptoc/request_cpptoc.h"
 #include "libacf_dll/transfer_util.h"
 
 // VIRTUAL METHODS - Body may be edited by hand.
@@ -425,6 +427,39 @@ void AcfBrowserHandlerCToCpp::DidMuteStateUpdate(AcfRefPtr<AcfBrowser> browser,
   // Execute
   _struct->did_mute_state_update(_struct, AcfBrowserCppToC::Wrap(browser),
                                  muted);
+}
+
+void AcfBrowserHandlerCToCpp::OnBeforeNavigation(
+    AcfRefPtr<AcfBrowser> browser,
+    AcfRefPtr<AcfFrame> frame,
+    AcfRefPtr<AcfRequest> request,
+    bool user_gesture,
+    bool is_redirect,
+    AcfRefPtr<AcfCallback> callback) {
+  acf_browser_handler_t* _struct = GetStruct();
+  if (ACF_MEMBER_MISSING(_struct, on_before_navigation))
+    return;
+
+  // AUTO-GENERATED CONTENT - DELETE THIS COMMENT BEFORE MODIFYING
+
+  // Verify param: browser; type: refptr_diff
+  if (!browser.get())
+    return;
+  // Verify param: frame; type: refptr_diff
+  if (!frame.get())
+    return;
+  // Verify param: request; type: refptr_diff
+  if (!request.get())
+    return;
+  // Verify param: callback; type: refptr_diff
+  if (!callback.get())
+    return;
+
+  // Execute
+  _struct->on_before_navigation(_struct, AcfBrowserCppToC::Wrap(browser),
+                                AcfFrameCppToC::Wrap(frame),
+                                AcfRequestCppToC::Wrap(request), user_gesture,
+                                is_redirect, AcfCallbackCppToC::Wrap(callback));
 }
 
 // CONSTRUCTOR - Do not edit by hand.

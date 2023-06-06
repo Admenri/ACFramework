@@ -58,4 +58,17 @@ class AcfNumberCompleteHandler : public virtual AcfBaseRefCounted {
   virtual void OnComplete(int value) = 0;
 };
 
-#endif
+///
+/// Complete event callback generic
+///
+/*--acf(source=library)--*/
+class AcfCallback : public virtual AcfBaseRefCounted {
+ public:
+  ///
+  /// Continue process event
+  ///
+  /*--acf(capi_name=cont)--*/
+  virtual void Continue(bool cancel) = 0;
+};
+
+#endif  // ACF_CALLBACK_H_

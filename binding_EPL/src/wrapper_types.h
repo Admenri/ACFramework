@@ -11,7 +11,7 @@
 #define ISVALIDR(v, r) \
   if (!v) return r;
 
-typedef struct _acf_cookie_t {
+typedef struct _cookie_t {
   LPCSTR name;
   LPCSTR value;
   LPCSTR domain;
@@ -25,5 +25,15 @@ typedef struct _acf_cookie_t {
   int same_site;
   int priority;
 } ACF_COOKIE, *PACF_COOKIE;
+
+typedef struct _browser_settings_t {
+  bool disable_drag;
+  bool disable_accelerator;
+} ACF_BROWSER_SETTINGS, *PACF_BROWSER_SETTINGS;
+
+typedef struct _string_pair_t {
+  LPCSTR key;
+  LPCSTR value;
+} ACF_STRING_PAIR, *PACF_STRING_PAIR;
 
 #endif

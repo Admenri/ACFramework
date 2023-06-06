@@ -5,7 +5,7 @@
 // by hand. See the translator.README.txt file in the tools directory for
 // more information.
 //
-// $hash=634ea1a26f7d11428220c35c15d653cd8ed0c047$
+// $hash=f87b8c1157681d06105f682fe74ed24a98012fa2$
 //
 
 #ifndef ACF_INCLUDE_CAPI_ACF_BROWSER_HANDLER_CAPI_H_
@@ -16,6 +16,7 @@
 #include "include/capi/acf_context_menu_capi.h"
 #include "include/capi/acf_environment_capi.h"
 #include "include/capi/acf_frame_capi.h"
+#include "include/capi/acf_request_capi.h"
 #include "include/capi/acf_values_capi.h"
 #include "include/internal/acf_scoped_refptr.h"
 #include "include/internal/acf_types.h"
@@ -23,6 +24,17 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+struct _acf_browser_t;
+struct _acf_callback_t;
+struct _acf_context_menu_callback_t;
+struct _acf_dictionary_value_t;
+struct _acf_environment_t;
+struct _acf_frame_t;
+struct _acf_login_delegate_t;
+struct _acf_new_window_delegate_t;
+struct _acf_profile_t;
+struct _acf_request_t;
 
 ///
 /// Browser event list handler model
@@ -195,6 +207,18 @@ typedef struct _acf_browser_handler_t {
   void(ACF_CALLBACK* did_mute_state_update)(struct _acf_browser_handler_t* self,
                                             struct _acf_browser_t* browser,
                                             int muted);
+
+  ///
+  /// Async running on browser navigation request, default: Continue(false (0)).
+  /// The request object is readonly without any post data and cookie data.
+  ///
+  void(ACF_CALLBACK* on_before_navigation)(struct _acf_browser_handler_t* self,
+                                           struct _acf_browser_t* browser,
+                                           struct _acf_frame_t* frame,
+                                           struct _acf_request_t* request,
+                                           int user_gesture,
+                                           int is_redirect,
+                                           struct _acf_callback_t* callback);
 } acf_browser_handler_t;
 
 #ifdef __cplusplus
